@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\usuariosController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -11,4 +12,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[LoginController::class,'index'])->name('home');
 
 //Ruta para el login
-Route::post('/login',[LoginController::class,'login'])->name('user.login');
+Route::post('/',[LoginController::class,'login'])->name('user.login');
+
+//ruta para el menu del medico
+Route::get('/menuadmin',[usuariosController::class,'menu'])->name('admin.menu');

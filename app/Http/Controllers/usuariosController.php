@@ -9,6 +9,12 @@ use Exception;
 
 class usuariosController extends Controller
 {
+
+    //lleva a la vista del menu del administrador
+    public function menu(){
+        return view('Menuadmin');
+    }
+
     //Lista todos los usuarios
     public function index()
     {
