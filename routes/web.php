@@ -11,3 +11,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[LoginController::class,'index'])->name('home');
 
 //Ruta para el login
+Route::post('/login',[LoginController::class,'login'])->name('user.login');

@@ -9,4 +9,8 @@ class LoginController extends Controller
     public function index(){
         return view('Login');
     }
+
+    public function login(){
+        
+    }
 }
