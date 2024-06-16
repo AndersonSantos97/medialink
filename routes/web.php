@@ -1,7 +1,13 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+//Lleva a la pagina principal
+Route::get('/',[LoginController::class,'index'])->name('home');
+
+//Ruta para el login
