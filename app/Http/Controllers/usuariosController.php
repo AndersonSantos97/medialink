@@ -15,6 +15,11 @@ class usuariosController extends Controller
         return view('Menuadmin');
     }
 
+    //lleva a la vista donde se administran los usuarios
+    public function usersview(){
+        return view('Usuarios');
+    }
+
     //Lista todos los usuarios
     public function index()
     {

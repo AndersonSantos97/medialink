@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 //Lleva a la pagina principal
+//Route::get('/',[usuariosController::class,'usersview'])->name('users.view');
+
 Route::get('/',[LoginController::class,'index'])->name('home');
 
 //Ruta para el login
