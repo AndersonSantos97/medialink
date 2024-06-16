@@ -14,6 +14,7 @@ class LoginController extends Controller
     }
 
     public function login(LoginRequest $loginRequest){
+        print('entramos a la excepcion');
         try{
             $credentials = $loginRequest->getCredentials();
 
@@ -26,6 +27,7 @@ class LoginController extends Controller
     
             return redirect()->route('admin.menu');
         }catch(Exception $e){
+            
             return $e->getMessage();
         }
     }
