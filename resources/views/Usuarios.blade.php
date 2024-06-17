@@ -21,47 +21,50 @@
       </div>
 
                           
+      <form action="{{ route('users.save')}}" method="POST">
+        @csrf
+        <div class="p-8 bg-white shadow-lg rounded-lg w-full max-w-7xl">
 
-      <div class="p-8 bg-white shadow-lg rounded-lg w-full max-w-7xl">
-
-        <div class="mb-4">
-          <label for="device-name" class="block text-sm font-medium text-gray-700">Nombre de Usario</label>
-          <input type="text" id="device-name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-      </div>
-      <div class="mb-4">
-        <label for="device-name" class="block text-sm font-medium text-gray-700">Contraseña</label>
-        <input type="text" id="device-name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-    </div>
-      
-      
-    <div class="mb-4">
-      <label for="role" class="block text-sm font-medium text-gray-700">ROL</label>
-      <select id="role" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-        <option value="" disabled selected>Selecciona un rol</option>
-        <option value="1">Admin</option>
-        <option value="2">Moderador</option>
-        <option value="3">Visor</option>
-       
-      </select>
-    </div>
-       
-      
-        <div class="flex justify-between mb-4">
-          
-          <button class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium text-white duration-200 bg-gray-900 md:w-auto rounded-xl hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-black" aria-label="Primary action">
-            Agregar
-          </button>
-          <button class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium text-white duration-200 bg-gray-900 md:w-auto rounded-xl hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-black" aria-label="Primary action">
-            Modificar
-          </button>
-          <button class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium text-white duration-200 bg-gray-900 md:w-auto rounded-xl hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-black" aria-label="Primary action">
-            Eliminar
-          </button>
-          <button class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium duration-200 bg-gray-100 md:w-auto rounded-xl hover:bg-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" aria-label="Secondary action">
-            Salir
-          </button>
-    
+          <div class="mb-4">
+            <label for="device-name" class="block text-sm font-medium text-gray-700">Nombre de Usario</label>
+            <input name="usu_nombre" type="text" id="device-name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         </div>
+        <div class="mb-4">
+          <label for="device-name" class="block text-sm font-medium text-gray-700">Contraseña</label>
+          <input name="usu_password" type="text" id="device-name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+        
+        
+        <div class="mb-4">
+        <label for="role" class="block text-sm font-medium text-gray-700">ROL</label>
+        <select name="usu_rol" id="role" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          <option value="" disabled selected>Selecciona un rol</option>
+          <option value="1">Admin</option>
+          <option value="2">Moderador</option>
+          <option value="3">Visor</option>
+        
+        </select>
+        </div>
+        
+        
+          <div class="flex justify-between mb-4">
+            
+            <button type="submit" name="action" class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium text-white duration-200 bg-gray-900 md:w-auto rounded-xl hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-black" aria-label="Primary action">
+              Agregar
+            </button>
+            <button class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium text-white duration-200 bg-gray-900 md:w-auto rounded-xl hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-black" aria-label="Primary action">
+              Modificar
+            </button>
+            <button class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium text-white duration-200 bg-gray-900 md:w-auto rounded-xl hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-black" aria-label="Primary action">
+              Eliminar
+            </button>
+            <button class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium duration-200 bg-gray-100 md:w-auto rounded-xl hover:bg-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" aria-label="Secondary action">
+              Salir
+            </button>
+      
+          </div>
+      </form>
+
         <div class="text-center">
           <table class="min-w-full bg-white border border-gray-300">
             <thead>

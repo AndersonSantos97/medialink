@@ -18,3 +18,6 @@ Route::post('/login',[LoginController::class,'login'])->name('user.login');
 
 //ruta para el menu del medico
 Route::get('/menuadmin',[usuariosController::class,'menu'])->name('admin.menu');
+
+//ruta de tipo post para guardar la informacion del usuario
+Route::post('/usersview/save',[usuariosController::class,'store'])->name('users.save');

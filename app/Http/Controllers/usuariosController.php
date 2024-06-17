@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\usuarios;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Exception;
@@ -47,25 +48,25 @@ class usuariosController extends Controller
     public function store(Request $request){
         
         try{
-            $request->validate([
-                'USU_NOMBRE' => 'required|string|max:8',
-                'USU_EMPLEADO' => 'nullable|integer',
-                'USU_ESTADO' => 'nullable|integer',
-                'USU_PASSWORD' => 'required|string|max:45',
-                'USU_ROL' => 'nullable|integer',
-            ]);
+            // $request->validate([
+            //     'USU_NOMBRE' => 'required|string|max:8',
+            //     'USU_ESTADO' => 'nullable|integer',
+            //     'USU_PASSWORD' => 'required|string|max:45',
+            //     'USU_ROL' => 'nullable|integer',
+            // ]);
     
             $usuario = new usuarios([
-                'USU_NOMBRE'=>$request->USU_NOMBRE,
-                'USU_EMPLEADO'=>$request->USU_EMPLEADO,
-                'USU_ESTADO'=>$request->USU_ESTADO,
-                'USU_PASSWORD'=> Hash::make($request->USU_PASSWORD),
-                'USU_ROL' => $request->USU_ROL,
+                'USU_NOMBRE'=>$request->usu_nombre,
+                'USU_ESTADO'=>1,
+                'USU_PASSWORD'=> Hash::make($request->usu_password),
+                'USU_ROL' => $request->usu_rol,
+                'CREATED_AT'=>Carbon::now(),
             ]);
     
             $usuario->save();
-            return redirect()->route('')->with('success','Usuario Creado con éxito');
+            return redirect()->route('users.view')->with('success','Usuario Creado con éxito');
         }catch(Exception $e){
+            print($e);
             return $e->getMessage();
         }
 

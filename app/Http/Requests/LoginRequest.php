@@ -22,17 +22,17 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'USU_NOMBRE'=>'requiered',
-            'USU_PASSWORD'=>'required',
-            'USU_ROL'=>'requiered',
-            'USU_ESTADO'=>'required'
+            'usu_nombre'=>'requiered',
+            'usu_password'=>'required',
+            'usu_rol'=>'requiered',
+            'usu_estado'=>'required'
         ];
     }
 
     public function getCredentials(){
-        $usu_nombre=$this->get('USU_NOMBRE');
-        $usu_password=$this->get('USU_PASSWORD');
-        $usu_rol = $this->get('USU_ROL');
+        $usu_nombre=$this->get('usu_nombre');
+        $usu_password=$this->get('usu_password');
+        $usu_rol = $this->get('usu_rol');
         $usu_estado = $this->get(1);
 
         return $this->only('usu_nombre','usu_password','usu_rol','usu_estado');
