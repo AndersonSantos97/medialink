@@ -22,6 +22,7 @@
 
                           
       <form action="{{ route('users.save')}}" method="POST">
+        
         @csrf
         <div class="p-8 bg-white shadow-lg rounded-lg w-full max-w-7xl">
 
