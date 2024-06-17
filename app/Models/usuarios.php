@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class usuarios extends Model
+class usuarios extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
     protected $table = "usuarios";
 
     //Aqui especificamos cual es la clave primaria
@@ -16,7 +18,6 @@ class usuarios extends Model
     //Campos que pueden ser asignados masivamente
     protected $fillable = [
         'USU_NOMBRE',
-        'USU_EMPLEADO',
         'USU_ESTADO',
         'USU_PASSWORD',
         'USU_ROL',
@@ -25,7 +26,7 @@ class usuarios extends Model
 
     //ocultar campos sensibles
     protected $hidden = [
-        'usu_password',
+        'USU_PASSWORD',
     ];
 
 
@@ -35,15 +36,22 @@ class usuarios extends Model
         'updated_at',
     ];
 
-    //Definir la relacion con el empleado (si existe una tabla empleados)
-    public function empleado()
-    {
-        return $this->belongsTo(Empleado::class,'USU_EMPLEADO');
-    }
 
     //Definir la relacion con el rol (si existe una tabla roles)
     public function rol()
     {
         return $this->belongsTo(Roles::class,'USU_ROL');
     }
+
+        // Ajustar para usar el campo de nombre de usuario
+        public function getAuthIdentifierName()
+        {
+            return 'USU_NOMBRE';
+        }
+    
+        // Ajustar para usar el campo de contraseña personalizado
+        public function getAuthPassword()
+        {
+            return $this->USU_PASSWORD;
+        }
 }

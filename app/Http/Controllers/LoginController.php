@@ -14,16 +14,17 @@ class LoginController extends Controller
     }
 
     public function login(LoginRequest $loginRequest){
-        print('entramos a la excepcion');
-        try{
-            $credentials = $loginRequest->getCredentials();
 
-            if(!Auth::validate($credentials)){
-                return redirect()->route('home')->withErrors('auth.failed');
+        try{
+            //$credentials = $loginRequest->getCredentials();
+            $credentials = $loginRequest->only('name', 'password');
+
+            if (!Auth::attempt(['name' => $credentials['name'], 'password' => $credentials['password']])) {
+                return redirect()->route('home')->withErrors(['auth' => 'Credenciales incorrectas']);
             }
     
-            $user = Auth::getProvider()->retrieveByCredentials($credentials);
-            Auth::login($user);
+            // $user = Auth::getProvider()->retrieveByCredentials($credentials);
+            // Auth::login($user);
     
             return redirect()->route('admin.menu');
         }catch(Exception $e){
