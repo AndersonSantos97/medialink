@@ -15,11 +15,32 @@ class LoginRequest extends FormRequest
          return true;
      }
  
-     public function rules(): array
-     {
-         return [
-             'name' => 'required',
-             'password' => 'required',
-         ];
-     }
+    //  public function rules(): array
+    //  {
+    //      return [
+    //          'username' => 'required',
+    //          'password' => 'required',
+    //      ];
+    //  }
+        /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            'username' => 'required',
+            'password'=> 'required',
+            'rol'=> 'required',
+        ];
+    }
+
+    public function getCredentials(){
+        $username =$this ->get('username');
+        $password =$this ->get('password');
+        $rol = $this->get('rol');
+
+        return $this->only('username','password','rol');
+    }
 }
