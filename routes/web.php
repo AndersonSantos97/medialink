@@ -32,5 +32,9 @@ Route::get('/menumodera',[RolesController::class,'moder'])->name('moder.menu');
 //ruta para el menu del visor
 Route::get('/menuvisor',[RolesController::class,'visor'])->name('visor.menu');
 
+//Ruta para acceder a la vista de usuario 
+Route::get('/usuarios',[UserController::class,'usersview'])->name('user.view');
+
 //ruta de tipo post para guardar la informacion del usuario
 Route::post('/usersview/save',[UserController::class,'store'])->name('users.save');
+

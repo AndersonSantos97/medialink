@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\roles;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Exception;
 
+use function Laravel\Prompts\search;
+
 class UserController extends Controller
 {
     
         //lleva a la vista donde se administran los usuarios
         public function usersview(){
-            return view('Usuarios');
+            $list = $this->searchRole();
+            return view('Usuarios','list');
         }
     
         //Lista todos los usuarios
@@ -37,19 +41,18 @@ class UserController extends Controller
             }
             
         }
-    
+        
+        //Buscar todos los usuarios que esten activos
+        public function searchRole(){
+            //$roles = roles::find
+            $users = User::with('rol')->get();
+            return $users;
+        }
     
         //crear un nuevo usuario
         public function store(Request $request){
             
             try{
-                // $request->validate([
-                //     'USU_NOMBRE' => 'required|string|max:8',
-                //     'USU_ESTADO' => 'nullable|integer',
-                //     'USU_PASSWORD' => 'required|string|max:45',
-                //     'USU_ROL' => 'nullable|integer',
-                // ]);
-        
                 $usuario = new User([
                     'username'=>$request->usu_nombre,
                     'estado'=>1,
