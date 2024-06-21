@@ -57,6 +57,20 @@ class LoginController extends Controller
 
     }
 
+    public function logout(Request $request){
+        try{
+            Auth::logout();
+
+            $request->session()->invalidate();
+            $request->session()->regenerate();
+    
+            return redirect()->route('home');
+
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+    }
+
     public function login2(LoginRequest $loginRequest){
 
         try{
