@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\roles;
+use Exception;
 use Illuminate\Http\Request;
 
 class RolesController extends Controller
@@ -21,4 +23,5 @@ class RolesController extends Controller
     public function visor(){
         return view('Menuvisor');
     }
+
 }

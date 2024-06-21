@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\roles;
 use App\Models\User;
+use App\Traits\GeneralTrait;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
@@ -19,11 +20,12 @@ class UserController extends Controller
         public function usersview(){
             //$list = $this->searchRole();
             try{
+                $roles = roles::all();
                 $users = DB::table('users')
                 ->join('roles','users.rol','=','roles.id')
                 ->select('users.id','users.username','roles.rol_descripcion')
                 ->get();
-        return view('Usuarios',compact('users'));
+                return view('Usuarios',compact('users','roles'));
             }catch(Exception $e){
                 return $e->getMessage();
             }
@@ -33,6 +35,7 @@ class UserController extends Controller
         public function index()
         {
             try{
+                
                 $usuarios = User::all();
                 return view('',compact('usuarios'));
             }catch(Exception $e){
