@@ -72,17 +72,24 @@
               <tr>
                 <th class="px-4 py-2 border-b border-gray-300">ID</th>
                 <th class="px-4 py-2 border-b border-gray-300">Nombre De Usuario</th>
-                <th class="px-4 py-2 border-b border-gray-300">Contraseña</th>
+                {{-- <th class="px-4 py-2 border-b border-gray-300">Contraseña</th> --}}
                 <th class="px-4 py-2 border-b border-gray-300">Rol</th>
               </tr>
             </thead>
             <tbody>
+              @foreach ($users as $user)
               <tr>
+                <td class="px-4 py-2 border-b border-gray-300">{{ $user->id}}</td>
+                <td class="px-4 py-2 border-b border-gray-300">{{ $user->username}}</td>
+                <td class="px-4 py-2 border-b border-gray-300">{{ $user->rol_descripcion}}</td>
+              </tr>
+              @endforeach
+              {{-- <tr>
                 <td class="px-4 py-2 border-b border-gray-300">01</td>
                 <td class="px-4 py-2 border-b border-gray-300">Moderador1</td>
                 <td class="px-4 py-2 border-b border-gray-300">Tempo2024#1</td>
                 <td class="px-4 py-2 border-b border-gray-300">Moderador</td>
-              </tr>
+              </tr> --}}
             </tbody>
           </table>
         </div>

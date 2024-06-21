@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 use function Laravel\Prompts\search;
 
@@ -16,8 +17,16 @@ class UserController extends Controller
     
         //lleva a la vista donde se administran los usuarios
         public function usersview(){
-            $list = $this->searchRole();
-            return view('Usuarios','list');
+            //$list = $this->searchRole();
+            try{
+                $users = DB::table('users')
+                ->join('roles','users.rol','=','roles.id')
+                ->select('users.id','users.username','roles.rol_descripcion')
+                ->get();
+        return view('Usuarios',compact('users'));
+            }catch(Exception $e){
+                return $e->getMessage();
+            }
         }
     
         //Lista todos los usuarios
