@@ -10,10 +10,6 @@ use Exception;
 
 class UserController extends Controller
 {
-        //lleva a la vista del menu del administrador
-        public function menu(){
-            return view('Menuadmin');
-        }
     
         //lleva a la vista donde se administran los usuarios
         public function usersview(){

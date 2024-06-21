@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -16,7 +17,47 @@ class LoginController extends Controller
     {
         return 'username';
     }
-    public function login(LoginRequest $loginRequest){
+
+    public function login(Request $request){
+
+        try{
+            $credentials =[
+                "username"=>$request->username,
+                "password"=>$request->password,
+                "estado"=>1,
+            ];
+    
+            $remember =($request->has('remember')?true:false);
+    
+            if(Auth::attempt($credentials,$remember)){
+                $request->session()->regenerate();
+
+                $user = Auth::user();
+                switch($user->rol){
+                    case 1:
+                        return redirect()->intended(route('admin.menu'));
+
+                    case 2:
+                        return redirect()->intended(route('moder.menu'));
+                    
+                    case 3:
+                        return redirect()->intended(route('visor.menu'));
+                    default:
+                        redirect()->route('home');
+                }
+                //return redirect()->intended(route('admin.menu'));
+
+            }else{
+
+                return redirect()->route('home')->withErrors(['auth' => 'Credenciales incorrectas']);
+            }
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+
+    }
+
+    public function login2(LoginRequest $loginRequest){
 
         try{
             $credentials = $loginRequest->getCredentials();
