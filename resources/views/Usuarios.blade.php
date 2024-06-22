@@ -28,26 +28,22 @@
         <div class="p-8 bg-white shadow-lg rounded-lg w-full max-w-7xl">
 
           <div class="mb-4">
-            <label for="device-name" class="block text-sm font-medium text-gray-700">Nombre de Usario</label>
-            <input name="usu_nombre" type="text" id="device-name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <label for="usu_nombre" class="block text-sm font-medium text-gray-700">Nombre de Usario</label>
+            <input name="usu_nombre" type="text" id="usu_nombre" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         </div>
         <div class="mb-4">
-          <label for="device-name" class="block text-sm font-medium text-gray-700">Contraseña</label>
-          <input name="usu_password" type="text" id="device-name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+          <label for="usu_password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+          <input name="usu_password" type="text" id="usu_password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         </div>
         
         
         <div class="mb-4">
-        <label for="role" class="block text-sm font-medium text-gray-700">ROL</label>
-        <select name="usu_rol" id="role" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        <label for="usu_rol" class="block text-sm font-medium text-gray-700">ROL</label>
+        <select name="usu_rol" id="usu_rol" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
           <option value="" disabled selected>Selecciona un rol</option>
           @foreach ($roles as $rol)
-            {{-- {{ dd($rol)}} --}}
             <option value={{ $rol->ID}}>{{ $rol->ROL_DESCRIPCION}}</option>
           @endforeach
-          {{-- <option value="1">Admin</option>
-          <option value="2">Moderador</option>
-          <option value="3">Visor</option> --}}
         
         </select>
         </div>
@@ -83,7 +79,7 @@
             </thead>
             <tbody>
               @foreach ($users as $user)
-              <tr>
+              <tr class="user-row" data-id="{{ $user->id}}" data-username="{{ $user->username}}" data-rol="{{ $user->rol}}">
                 <td class="px-4 py-2 border-b border-gray-300">{{ $user->id}}</td>
                 <td class="px-4 py-2 border-b border-gray-300">{{ $user->username}}</td>
                 <td class="px-4 py-2 border-b border-gray-300">{{ $user->rol_descripcion}}</td>
@@ -105,6 +101,16 @@
    
     
   </section>
+
+  <script>
+    document.querySelectorAll('.user-row').forEach(row=>{
+      row.addEventListener('click',function(){
+        document.getElementById('usu_nombre').value = this.getAttribute('data-username');
+        document.getElementById('usu_password').value = ''; // Asumiendo que la contraseña no se muestra
+        document.getElementById('usu_rol').value = this.getAttribute('data-rol');
+      })
+    })
+  </script>
 
 
   
