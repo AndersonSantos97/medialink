@@ -21,10 +21,12 @@ class UserController extends Controller
             //$list = $this->searchRole();
             try{
                 $roles = roles::all();
+                
                 $users = DB::table('users')
                 ->join('roles','users.rol','=','roles.id')
                 ->select('users.id','users.username','roles.rol_descripcion')
                 ->get();
+                //dd($roles);
                 return view('Usuarios',compact('users','roles'));
             }catch(Exception $e){
                 return $e->getMessage();
@@ -75,7 +77,7 @@ class UserController extends Controller
                 ]);
         
                 $usuario->save();
-                return redirect()->route('users.view')->with('success','Usuario Creado con éxito');
+                return redirect()->route('user.view')->with('success','Usuario Creado con éxito');
             }catch(Exception $e){
                 print($e);
                 return $e->getMessage();

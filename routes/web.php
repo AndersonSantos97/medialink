@@ -36,5 +36,5 @@ Route::get('/menuvisor',[RolesController::class,'visor'])->name('visor.menu');
 Route::get('/usuarios',[UserController::class,'usersview'])->name('user.view');
 
 //ruta de tipo post para guardar la informacion del usuario
-Route::post('/usersview/save',[UserController::class,'store'])->name('users.save');
+Route::post('/usuarios/save',[UserController::class,'store'])->name('users.save');
 

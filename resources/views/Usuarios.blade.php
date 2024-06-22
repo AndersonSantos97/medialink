@@ -1,3 +1,4 @@
+{{-- {{dd($roles)}} --}}
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-white">
 <head>
@@ -41,7 +42,8 @@
         <select name="usu_rol" id="role" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
           <option value="" disabled selected>Selecciona un rol</option>
           @foreach ($roles as $rol)
-          <option value="{{ $rol->id}}">{{ $rol->rol_descripcion}}</option>
+            {{-- {{ dd($rol)}} --}}
+            <option value={{ $rol->ID}}>{{ $rol->ROL_DESCRIPCION}}</option>
           @endforeach
           {{-- <option value="1">Admin</option>
           <option value="2">Moderador</option>
