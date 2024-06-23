@@ -4,6 +4,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\usuariosController;
+use App\Http\Controllers\empleadoController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -37,4 +38,7 @@ Route::get('/usuarios',[UserController::class,'usersview'])->name('user.view');
 
 //ruta de tipo post para guardar la informacion del usuario
 Route::post('/usuarios/save',[UserController::class,'store'])->name('users.save');
+
+//ruta para empleados
+Route::get('/empleados',[empleadoController::class,'emp'])->name('Empleados');
 
