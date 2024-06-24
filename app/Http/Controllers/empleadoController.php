@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\empleado;
 use Illuminate\Http\Request;
 
 class empleadoController extends Controller
@@ -12,7 +13,7 @@ class empleadoController extends Controller
     }
    
     public function buscarPorId($id){
-    $empleado = Empleado::find($id);
+    $empleado = empleado::find($id);
 
     if (!$empleado) {
         return "No se encontró ningún empleado con el ID: $id";
