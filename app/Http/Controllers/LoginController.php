@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Http\Requests\LoginRequest;
 use Exception;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -59,6 +61,7 @@ class LoginController extends Controller
 
     public function logout(Request $request){
         try{
+            //Session::flush();
             Auth::logout();
 
             $request->session()->invalidate();
