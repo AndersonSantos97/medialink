@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 use function Laravel\Prompts\search;
@@ -19,12 +20,15 @@ class UserController extends Controller
         //lleva a la vista donde se administran los usuarios
         public function usersview(){
             //$list = $this->searchRole();
+            //dd(auth()->user());
             try{
                 $roles = roles::all();
-                
+                //$currentUser = Auth()->user()->username;
                 $users = DB::table('users')
                 ->join('roles','users.rol','=','roles.id')
                 ->select('users.id','users.username','roles.rol_descripcion','users.rol')
+                ->where('users.estado',1)
+                //->where('users.id','!=',$currentUser)
                 ->get();
                 //dd($roles);
                 return view('Usuarios',compact('users','roles'));
@@ -160,9 +164,26 @@ class UserController extends Controller
                 return redirect()->route('user.view')->with('Error','Error al actualizar el usuario: '.$e->getMessage());
 
             }
-            
+        }
+
+                //Actualizar un usuario existente
+        public function delete($id){
     
-    
+            try{
+                $usuario = User::find($id);
+                if(!$usuario){
+                    return redirect()->route('user.view')->with('error','Usuario no actualizado');
+                }
+                $usuario->estado = 0;
+                $usuario->updated_at = Carbon::now();
+
+                $usuario->save();
+        
+                return redirect()->route('user.view')->with('success','usuario actualizado con exito');
+            }catch(Exception $e){
+                return redirect()->route('user.view')->with('Error','Error al actualizar el usuario: '.$e->getMessage());
+
+            }
         }
     
         //eliminar un usuario

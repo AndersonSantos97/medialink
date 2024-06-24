@@ -18,7 +18,7 @@
         </h1>
         <p class="w-1/2 mx-auto mt-4 text-base font-medium text-gray-500 text-balance">
          Seccion para Agregar , Modifica y eliminar Usarios, quienes podran ingresar al Sistema de Enlace        
-        
+
       </div>
 
                           
@@ -63,7 +63,7 @@
             <button type="button" onclick="submitForm('modify')" class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium text-white duration-200 bg-gray-900 md:w-auto rounded-xl hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-black" aria-label="Primary action">
               Modificar
             </button>
-            <button type="button" onclick="deleteUser()" class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium text-white duration-200 bg-gray-900 md:w-auto rounded-xl hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-black" aria-label="Primary action">
+            <button type="button" onclick="deleteUser('delete')" class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium text-white duration-200 bg-gray-900 md:w-auto rounded-xl hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-black" aria-label="Primary action">
               Eliminar
             </button>
             <button class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium duration-200 bg-gray-100 md:w-auto rounded-xl hover:bg-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" aria-label="Secondary action">
@@ -151,10 +151,24 @@
     //   document.getElementById('usu_rol').value = '';
     // }
 
-  
+    function deleteUser(action){
+      //alert('Eliminar Usuario');
+      const form = document.getElementById('userForm');
+      const methodField = document.getElementById('method');
+      if(action === 'delete'){
+        form.action = "{{ route('users.delete', ':id')}}".replace(':id',document.getElementById('usu_id').value);
+        methodField.value ='PUT';
+        //const methodField = document.createElement('input');
+        // methodField.setAttribute('type','hidden');
+        // methodField.setAttribute('name','method');
+        // methodField.setAttribute('value','PUT');
+        // form.appendChild(methodField);
+      }else{
+        form.action = '{{ route("users.save")}}';
+        form.method = 'POST';
+      }
 
-    function deleteUser(){
-      alert('Eliminar Usuario');
+      form.submit();
     }
   </script>
 
