@@ -15,7 +15,7 @@ class RolesController extends Controller
             redirect()->route('home');
             
         }else{
-            dd(Auth::check());
+            //dd(Auth::check());
             return view('Menuadmin');
         }
         

@@ -34,7 +34,9 @@ class LoginController extends Controller
             if(Auth::attempt($credentials,$remember)){
                 $request->session()->regenerate();
 
-                $user = Auth::user();
+                //$user = Auth::user();
+                $user = Auth::getProvider()->retrieveByCredentials($credentials);
+                Auth::login($user);
                 switch($user->rol){
                     case 1:
                         return redirect()->intended(route('admin.menu'));
