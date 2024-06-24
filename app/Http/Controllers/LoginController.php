@@ -36,7 +36,8 @@ class LoginController extends Controller
 
                 //$user = Auth::user();
                 $user = Auth::getProvider()->retrieveByCredentials($credentials);
-                Auth::login($user);
+                dd(Auth::login($user));
+                dd($user);
                 switch($user->rol){
                     case 1:
                         return redirect()->intended(route('admin.menu'));
