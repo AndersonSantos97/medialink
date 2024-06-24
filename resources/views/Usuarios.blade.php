@@ -1,4 +1,4 @@
-{{-- {{dd($roles)}} --}}
+
 <!DOCTYPE html>
 <html lang="en" class="h-full bg-white">
 <head>
@@ -22,9 +22,15 @@
       </div>
 
                           
-      <form action="{{ route('users.save')}}" method="POST">
+      <form id="userForm" action="{{ route('users.save')}}" method="POST">
         
         @csrf
+        <!--—Campo oculto para el método PUT -->
+        <input type="hidden" name="_method" id="method" value="POST">
+        
+        <!--—Campo oculto para el ID del usuario -->
+        <input type="hidden" name="usu_id" id="usu_id">
+
         <div class="p-8 bg-white shadow-lg rounded-lg w-full max-w-7xl">
 
           <div class="mb-4">
@@ -51,13 +57,13 @@
         
           <div class="flex justify-between mb-4">
             
-            <button type="submit" name="action" class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium text-white duration-200 bg-gray-900 md:w-auto rounded-xl hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-black" aria-label="Primary action">
+            <button type="button" onclick="submitForm('add')" name="action" class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium text-white duration-200 bg-gray-900 md:w-auto rounded-xl hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-black" aria-label="Primary action">
               Agregar
             </button>
-            <button class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium text-white duration-200 bg-gray-900 md:w-auto rounded-xl hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-black" aria-label="Primary action">
+            <button type="button" onclick="submitForm('modify')" class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium text-white duration-200 bg-gray-900 md:w-auto rounded-xl hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-black" aria-label="Primary action">
               Modificar
             </button>
-            <button class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium text-white duration-200 bg-gray-900 md:w-auto rounded-xl hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-black" aria-label="Primary action">
+            <button type="button" onclick="deleteUser()" class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium text-white duration-200 bg-gray-900 md:w-auto rounded-xl hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-black" aria-label="Primary action">
               Eliminar
             </button>
             <button class="inline-flex items-center justify-center w-full h-12 gap-3 px-5 py-3 font-medium duration-200 bg-gray-100 md:w-auto rounded-xl hover:bg-gray-200 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" aria-label="Secondary action">
@@ -73,7 +79,6 @@
               <tr>
                 <th class="px-4 py-2 border-b border-gray-300">ID</th>
                 <th class="px-4 py-2 border-b border-gray-300">Nombre De Usuario</th>
-                {{-- <th class="px-4 py-2 border-b border-gray-300">Contraseña</th> --}}
                 <th class="px-4 py-2 border-b border-gray-300">Rol</th>
               </tr>
             </thead>
@@ -105,11 +110,52 @@
   <script>
     document.querySelectorAll('.user-row').forEach(row=>{
       row.addEventListener('click',function(){
+        document.getElementById('usu_id').value = this.getAttribute('data-id')
         document.getElementById('usu_nombre').value = this.getAttribute('data-username');
         document.getElementById('usu_password').value = ''; // Asumiendo que la contraseña no se muestra
         document.getElementById('usu_rol').value = this.getAttribute('data-rol');
-      })
-    })
+      });
+    });
+
+    function clearForm(){
+      document.getElementById('usu_id').value ='';
+      document.getElementById('usu_nombre').value='';
+      document.getElementById('usu_password').value = '';
+      document.getElementById('usu_rol').value = '';
+      document.getElementById('method').value = 'POST';
+      document.getElementById('userForm').action = '{{ route("users.save")}}';
+    }
+
+    function submitForm(action){
+      const form = document.getElementById('userForm');
+      const methodField = document.getElementById('method');
+      if(action === 'modify'){
+        form.action = "{{ route('users.update', ':id')}}".replace(':id',document.getElementById('usu_id').value);
+        methodField.value ='PUT';
+        //const methodField = document.createElement('input');
+        // methodField.setAttribute('type','hidden');
+        // methodField.setAttribute('name','method');
+        // methodField.setAttribute('value','PUT');
+        // form.appendChild(methodField);
+      }else{
+        form.action = '{{ route("users.save")}}';
+        form.method = 'POST';
+      }
+
+      form.submit();
+    }
+
+    // function clearForm(){
+    //   document.getElementById('usu_nombre').value = '';
+    //   document.getElementById('usu_password').value = '';
+    //   document.getElementById('usu_rol').value = '';
+    // }
+
+  
+
+    function deleteUser(){
+      alert('Eliminar Usuario');
+    }
   </script>
 
 

@@ -39,6 +39,9 @@ Route::get('/usuarios',[UserController::class,'usersview'])->name('user.view');
 //ruta de tipo post para guardar la informacion del usuario
 Route::post('/usuarios/save',[UserController::class,'store'])->name('users.save');
 
+//Ruta para actualizar el usuario
+Route::put('usuaios/update/{id}',[UserController::class,'update'])->name('users.update');
+
 //ruta para empleados
 Route::get('/empleados',[empleadoController::class,'emp'])->name('Empleados');
 

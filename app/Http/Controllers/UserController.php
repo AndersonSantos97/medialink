@@ -24,7 +24,7 @@ class UserController extends Controller
                 
                 $users = DB::table('users')
                 ->join('roles','users.rol','=','roles.id')
-                ->select('users.id','users.username','roles.rol_descripcion')
+                ->select('users.id','users.username','roles.rol_descripcion','users.rol')
                 ->get();
                 //dd($roles);
                 return view('Usuarios',compact('users','roles'));
@@ -125,42 +125,40 @@ class UserController extends Controller
             try{
                 $usuario = User::find($id);
                 if(!$usuario){
-                    return redirect()->route('')->with('error','Usuario no actualizado');
+                    return redirect()->route('user.view')->with('error','Usuario no actualizado');
                 }
         
                 $request->validate([
-                    'USU_NOMBRE' => 'nullable|string|max:8',
-                    'USU_EMPLEADO' => 'nullable|integer',
-                    'USU_ESTADO' => 'nullable|integer',
-                    'USU_PASSWORD' => 'nullable|string|max:45',
-                    'USU_ROL' => 'nullable|integer',
+                    'name' => 'nullable|string|max:8',
+                    'password' => 'nullable|string|max:255',
+                    'rol' => 'nullable|integer',
                 ]);
         
-                if($request->has('USU_NOMBRE')){
-                    $usuario->USU_NOMBRE = $request->USU_NOMBRE;
+                if($request->has('usu_nombre')){
+                    $usuario->name = $request->usu_nombre;
+                    $usuario->username = $request->usu_nombre;
                 }
         
-                if($request->has('USU_EMPLEADO')){
-                    $usuario->USU_EMPLEADO = $request->USU_EMPLEADO;
+                // if($request->has('USU_ESTADO')){
+                //     $usuario->USU_ESTADO = $request->USU_ESTADO;
+                // }
+        
+                if($request->has('usu_password')){
+                    $usuario->password = Hash::make($request->usu_password);
                 }
         
-                if($request->has('USU_ESTADO')){
-                    $usuario->USU_ESTADO = $request->USU_ESTADO;
+                if($request->has('usu_rol')){
+                    $usuario->rol = $request->usu_rol;
                 }
-        
-                if($request->has('USU_PASSWORD')){
-                    $usuario->USU_PASSWORD = $request->USU_PASSWORD;
-                }
-        
-                if($request->has('USU_ROL')){
-                    $usuario->USU_ROL = $request->USU_ROL;
-                }
-        
+                
+                $usuario->updated_at = Carbon::now();
+
                 $usuario->save();
         
-                return redirect()->route('')->with('success','usuario actualizado con exito');
+                return redirect()->route('user.view')->with('success','usuario actualizado con exito');
             }catch(Exception $e){
-                return $e->getMessage();
+                return redirect()->route('user.view')->with('Error','Error al actualizar el usuario: '.$e->getMessage());
+
             }
             
     
