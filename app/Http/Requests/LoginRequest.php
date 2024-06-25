@@ -32,15 +32,15 @@ class LoginRequest extends FormRequest
         return [
             'username' => 'required',
             'password'=> 'required',
-            'rol'=> 'required',
         ];
     }
 
     public function getCredentials(){
         $username =$this ->get('username');
         $password =$this ->get('password');
-        $rol = $this->get('rol');
+        //$rol = $this->get('rol');
+        $estado =1;
 
-        return $this->only('username','password','rol');
+        return $this->only('username','password','estado');
     }
 }

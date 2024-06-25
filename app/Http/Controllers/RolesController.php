@@ -11,15 +11,13 @@ class RolesController extends Controller
 {
     //lleva a la vista del menu del administrador
     public function menu(){
-        if(Auth::check()){
-            redirect()->route('home');
-            
-        }else{
-            //dd(Auth::check());
-            return view('Menuadmin');
-        }
-        
-        
+        // if(Auth::check()){
+        //     return view('Menuadmin');
+        // }else{
+        //     //dd(Auth::check());
+        //     return redirect()->route('home');
+        // }
+        return view('Menuadmin');
     }
 
         //lleva a la vista del menu del moderador

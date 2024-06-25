@@ -13,8 +13,15 @@
         <div class="px-8 py-24 mx-auto md:px-12 lg:px-32 max-w-7xl">
           <div class="text-center">
             <h1 class="text-4xl font-semibold tracking-tighter text-gray-900 lg:text-5xl text-balance">
-              Bienvenido al Proyecto de Enlace Biometrico,
+              Bienvenido al Proyecto de Enlace Biometrico, 
+              @auth
+                  {{ Auth::user()->username}}
+
+                  <span>jjjj</span>
+              @endauth
+              
               <span class="text-gray-600">Haciendo las Consultas mas facil y seguras</span>
+
             </h1>
             <p class="w-1/2 mx-auto mt-4 text-base font-medium text-gray-500 text-balance">
              Seccion para agregar dispositivos biometricos, agregar usuarios en modo moderador o modo visor y tambien poder agregar empleados

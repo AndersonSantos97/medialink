@@ -14,7 +14,6 @@ class User extends Authenticatable
 
     //protected $table = 'users';
     protected $fillable = [
-        'name',
         'password',
         'rol',
         'estado',
@@ -36,6 +35,10 @@ class User extends Authenticatable
     {
         return 'username';
     }
+
+    // public function setPasswordAttribute($value){
+    //     $this->attributes['password'] = bcrypt($value);
+    // }
 
     // Definir el campo de la contraseña
     public function getAuthPassword()

@@ -77,7 +77,7 @@ class UserController extends Controller
                     'password'=> Hash::make($request->usu_password),
                     'rol' => $request->usu_rol,
                     'created_at'=>Carbon::now(),
-                    'name'=>$request->usu_nombre
+                    'email'=>$request->usu_nombre
                 ]);
         
                 $usuario->save();
@@ -133,13 +133,13 @@ class UserController extends Controller
                 }
         
                 $request->validate([
-                    'name' => 'nullable|string|max:8',
+                    'username' => 'nullable|string|max:8',
                     'password' => 'nullable|string|max:255',
                     'rol' => 'nullable|integer',
                 ]);
         
                 if($request->has('usu_nombre')){
-                    $usuario->name = $request->usu_nombre;
+                    $usuario->email = $request->usu_nombre;
                     $usuario->username = $request->usu_nombre;
                 }
         
